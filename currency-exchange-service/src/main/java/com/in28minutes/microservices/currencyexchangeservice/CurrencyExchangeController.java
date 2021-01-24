@@ -15,13 +15,10 @@ public class CurrencyExchangeController {
   @GetMapping("/currency-exchange/from/{from}/to/{to}")
   public CurrencyExchange retrieveExchangeValue(
       @PathVariable String from, @PathVariable String to) {
-//    CurrencyExchange currencyExchange =
-//        new CurrencyExchange(100L, from, to, BigDecimal.valueOf(50));
-
     CurrencyExchange currencyExchange = repository.findByFromAndTo(from, to);
 
-    if(currencyExchange == null) {
-      throw new RuntimeException("Unable to find data for " + from  + " to " + to);
+    if (currencyExchange == null) {
+      throw new RuntimeException("Unable to find data for " + from + " to " + to);
     }
 
     String port = environment.getProperty("local.server.port");
